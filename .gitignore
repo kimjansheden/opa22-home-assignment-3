@@ -41,7 +41,6 @@ Desktop.ini
 .DS_Store
 
 .json
-*.json
 
 # Created by https://www.toptal.com/developers/gitignore/api/rider,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=rider,macos
