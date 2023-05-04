@@ -1,4 +1,7 @@
 ﻿@page
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@using Server.Models
+@using Microsoft.EntityFrameworkCore
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -7,4 +10,11 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @foreach (User user in Model.Users)
+    {
+        <p>@user.Username</p>
+    }
+    <a asp-page="/CreateUser">Lägg till ny användare</a>
+    <iframe src="https://svenskamassan.se/2017/12/ilskan-driver-sven-yrvind-mot-nya-utmaningar-och-aventyr/"></iframe>
+
 </div>

@@ -1,28 +1,26 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Server.Models;
 
 public abstract class Ad
 {
-    public string Title { get; set; }
     
+    [Key]
     public int Id { get; set; }
-
+    [Required]
+    public string Title { get; set; }
     public string Description { get; set; }
-
     public int Price { get; set; }
-
+    [Required]
     public string Category { get; set; }
-    
     public bool Active { get; set; }
-    
     public string ImageUrl { get; set; }
-    
     public DateTime TimeCreated { get; set; }
-
     public int Length { get; set; }
 
-    public Ad(string title, string description, string category, string imageUrl, int price, int length)
+    public Ad(int id, string title, string description, string category, string imageUrl, int price, int length)
     {
-        //Id på något sätt från databasen
+        Id = id;
         Price = price;
         Length = length;
         Title = title;

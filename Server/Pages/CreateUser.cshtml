@@ -1,0 +1,28 @@
+@page
+@model Server.Pages.CreateUser
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div class="text-center">
+    <form method="post">
+            <input type="hidden" asp-for="TheUser.Id"/>
+            <label for="newUsername">Username: </label>
+            <input asp-for="TheUser.Username" id="newUsername"/>
+            <p><span asp-validation-for="TheUser.Username"></span></p>
+            <label for="newUsername">Password: </label>
+            <input asp-for="TheUser.Password" id="newPassword"/>
+            <p><span asp-validation-for="TheUser.Password"></span></p>
+            <button type="submit">Create New User</button>
+        </form>
+</div>
+</body>
+</html>
