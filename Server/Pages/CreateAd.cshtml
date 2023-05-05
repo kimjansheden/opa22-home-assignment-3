@@ -1,0 +1,48 @@
+@page
+@model Server.Pages.CreateAd
+
+@{
+    Layout = "/Pages/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Skapa annons</title>
+</head>
+<body>
+<div class="text-center">
+    <h1 class="display-4">Här skapar du din annons</h1>
+    <select name="number">
+        <option value="">Vill du köpa eller sälja?</option>
+        <option value="1">Köpa</option>
+        <option value="2">Sälja</option>
+    </select>
+    <form action ="upload.php" method="post" enctype="multipart/form-data">
+        <label for="Username">Användarnamn</label> 
+        <input name = "Username" type="Text"/>
+        <label for="Password">Lösenord</label>
+        <input name = "Password" type="Text"/>
+        
+                <label for="Title">Rubrik</label> 
+                <input name = "Title" type="Text"/>
+                <label for="Description">Beskrivning av produkt</label>
+        <input name = "Description" type="Text"/>
+        <select name="Category">
+                <option value="">Välj kategori?</option>
+                <option value="1">Motorbåt</option>
+                <option value="2">Segelbåt</option>
+                <option value="3">Annat</option>
+            </select>
+        <label for="Length">Längd</label>
+        <input name = "Length" type="Text"/>
+        <input type="file" name="ImageUrl" id="fileToUpload">
+        <input type="submit" value="Lägg till anons" name="submit">
+        
+    </form>
+    
+    
+</div>
+</body>
+</html>
