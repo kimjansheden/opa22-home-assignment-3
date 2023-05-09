@@ -4,15 +4,21 @@
 @{
     Layout = "/Pages/Shared/_Layout.cshtml";
 }
+@{
+    ViewData["Title"] = "Create Ad";
+}
 
 <!DOCTYPE html>
 
 <html>
-<head>
+    <body id="textDiv">
+        <head>
     <title>Skapa annons</title>
     <link rel="stylesheet" href="css/CreateAd.css">
 </head>
-<body>
+</body>
+
+<body id="background">
 <div id="textDiv">
     <h1 class="display-4">Här skapar du din annons</h1>
     <form action="upload.php" method="post" enctype="multipart/form-data">
