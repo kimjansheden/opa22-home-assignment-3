@@ -19,8 +19,13 @@
         
         
         <div class="container">
-            <div class="box"></div>
             
+            <div class="box">
+                <select name="number">
+                    <option value="">Vill du köpa eller sälja?</option>
+                    <option value="1">Köpa</option>
+                    <option value="2">Sälja</option>
+                </select></div>
             <div class="box">
                 <select name="Category">
                     <option value="">Välj kategori?</option>
@@ -28,18 +33,9 @@
                     <option value="2">Segelbåt</option>
                     <option value="3">Annat</option>
                 </select></div>
+            <div class="box"></div>
             
             <div class="box"></div>
-            <div class="box"><input type="file" name="ImageUrl" id="fileToUpload"></div>
-            
-            <div class="box"></div>
-            <div class="box">
-                <select name="number">
-                    <option value="">Vill du köpa eller sälja?</option>
-                    <option value="1">Köpa</option>
-                    <option value="2">Sälja</option>
-                </select>
-            </div>
             <div class="box"><label for="Username">Användarnamn</label></div>
             <div class="box"><input name="Username" type="Text"/></div>
             <div class="box"><label for="Password">Lösenord</label></div>
@@ -50,6 +46,10 @@
             <div class="box"><input name="Description" type="Text"/></div>
             <div class="box"><label for="Length">Längd</label></div>
             <div class="box"><input name="Length" type="Text"/></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"><input type="file" name="ImageUrl" id="fileToUpload"></div>
+            <div class="box"></div>
             <div class="box"><input type="submit" value="Lägg till annons" name="submit"></div>
         </div>
     </form>
