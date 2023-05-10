@@ -4,7 +4,6 @@ namespace Server.Models;
 
 public abstract class Ad
 {
-    
     [Key]
     public int Id { get; set; }
     [Required]
@@ -14,7 +13,7 @@ public abstract class Ad
     [Required]
     public string Category { get; set; }
     public bool Active { get; set; }
-    public string ImageUrl { get; set; }
+    public string? ImageUrl { get; set; }
     public DateTime TimeCreated { get; set; }
     public int Length { get; set; }
 
@@ -27,6 +26,12 @@ public abstract class Ad
         Description = description;
         Category = category;
         ImageUrl = imageUrl;
+        Active = true;
+        TimeCreated = DateTime.Now;
+    }
+
+    public Ad()
+    {
         Active = true;
         TimeCreated = DateTime.Now;
     }

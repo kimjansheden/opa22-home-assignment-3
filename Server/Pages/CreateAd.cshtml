@@ -21,13 +21,10 @@
 <body id="background">
 <div id="textDiv">
     <h1 class="display-4">Här skapar du din annons</h1>
-    <form action="upload.php" method="post" enctype="multipart/form-data">
-        
-        
+    <form method="post">
         <div class="container">
-            
             <div class="box">
-                <select name="number">
+                <select name="BuyOrSell" id="BuyOrSell">
                     <option value="">Vill du köpa eller sälja?</option>
                     <option value="1">Köpa</option>
                     <option value="2">Sälja</option>
@@ -43,19 +40,21 @@
             
             <div class="box"></div>
             <div class="box"><label for="Username">Användarnamn</label></div>
-            <div class="box"><input name="Username" type="Text"/></div>
+            <div class="box"><input id="Username" name="Username" type="Text"/></div>
             <div class="box"><label for="Password">Lösenord</label></div>
-            <div class="box"><input name="Password" type="Text"/></div>
+            <div class="box"><input id="Password" name="Password" type="Text"/></div>
             <div class="box"><label for="Title">Rubrik</label> </div>
-            <div class="box"><input name="Title" type="Text"/></div>
+            <div class="box"><input id="Title" name="Title" type="Text"/></div>
             <div class="box"><label for="Description">Beskrivning av produkt</label></div>
-            <div class="box"><input name="Description" type="Text"/></div>
-            <div class="box"><label for="Length">Längd</label></div>
-            <div class="box"><input name="Length" type="Text"/></div>
+            <div class="box"><input id="Description" name="Description" type="Text"/></div>
+            <div class="box"><label for="Length">Längd (cm)</label></div>
+            <div class="box"><input id="Length" name="Length" type="number"/></div>
+            <div class="box"><label for="Price">Pris (kr)</label></div>
+            <div class="box"><input id="Price" name="Price" type="number"/></div>
             <div class="box"></div>
             <div class="box"></div>
-            <div class="box"><input type="file" name="ImageUrl" id="fileToUpload"></div>
-            <div class="box"></div>
+            <div class="box"><p>Obs! Filuppladdning funkar ej</p></div>
+            <div class="box"><input type="file" name="ImageUrl" id="fileToUpload"/></div>
             <div class="box"><input type="submit" value="Lägg till annons" name="submit"></div>
         </div>
     </form>

@@ -14,8 +14,8 @@ public class User
     [Required]
     public string Password { get; set; }
     public bool LoggedIn { get; set; }
-    public List<SellAd> SellAds{ get; set; }
-    public List<BuyAd> ByAds { get; set; }
+    public List<SellAd>? SellAds{ get; set; }
+    public List<BuyAd>? BuyAds { get; set; }
 
     public User(int id, string username, string password)
     {
@@ -23,12 +23,14 @@ public class User
         Username = username;
         Password = password;
         SellAds = new List<SellAd>();
-        ByAds = new List<BuyAd>();
+        BuyAds = new List<BuyAd>();
         LoggedIn = false;
     }
 
     public User()
     {
+        SellAds = new List<SellAd>();
+        BuyAds = new List<BuyAd>();
     }
-    
+
 }
