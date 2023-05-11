@@ -10,9 +10,9 @@
 
 <!DOCTYPE html>
 
-<html>
-    <body id="textDiv">
-        <head>
+<html lang="sv">
+<body id="textDiv">
+<head>
     <title>Skapa annons</title>
     <link rel="stylesheet" href="css/CreateAd.css">
 </head>
@@ -28,25 +28,41 @@
                     <option value="">Vill du köpa eller sälja?</option>
                     <option value="1">Köpa</option>
                     <option value="2">Sälja</option>
-                </select></div>
+                </select>
+                <p><span asp-validation-for="BuyOrSell" class="text-danger"></span></p>
+            </div>
             <div class="box">
                 <select name="Category">
                     <option value="">Välj kategori?</option>
                     <option value="1">Motorbåt</option>
                     <option value="2">Segelbåt</option>
                     <option value="3">Annat</option>
-                </select></div>
+                </select>
+                <p><span asp-validation-for="Category" class="text-danger"></span></p>
+            </div>
             <div class="box"></div>
             
             <div class="box"></div>
             <div class="box"><label for="Username">Användarnamn</label></div>
-            <div class="box"><input id="Username" name="Username" type="Text"/></div>
+            <div class="box">
+                <input id="Username" name="Username" type="Text"/>
+                <p><span asp-validation-for="TheUser.Username" class="text-danger"></span></p>
+            </div>
             <div class="box"><label for="Password">Lösenord</label></div>
-            <div class="box"><input id="Password" name="Password" type="Text"/></div>
+            <div class="box">
+                <input id="Password" name="Password" type="Text"/>
+                <p><span asp-validation-for="TheUser.Password" class="text-danger"></span></p>
+            </div>
             <div class="box"><label for="Title">Rubrik</label> </div>
-            <div class="box"><input id="Title" name="Title" type="Text"/></div>
+            <div class="box">
+                <input id="Title" name="Title" type="Text"/>
+                <p><span class="text-danger">@Model.TitleError</span></p>
+            </div>
             <div class="box"><label for="Description">Beskrivning av produkt</label></div>
-            <div class="box"><input id="Description" name="Description" type="Text"/></div>
+            <div class="box">
+                <input id="Description" name="Description" type="Text"/>
+                <p><span class="text-danger">@Model.DescriptionError</span></p>
+            </div>
             <div class="box"><label for="Length">Längd (cm)</label></div>
             <div class="box"><input id="Length" name="Length" type="number"/></div>
             <div class="box"><label for="Price">Pris (kr)</label></div>
@@ -58,8 +74,6 @@
             <div class="box"><input type="submit" value="Lägg till annons" name="submit"></div>
         </div>
     </form>
-    
-    
 </div>
 </body>
 </html>

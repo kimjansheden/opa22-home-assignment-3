@@ -6,7 +6,7 @@ using Server.Models;
 
 namespace Server.Pages;
 
-public class CreateAd : PageModel, IValidatableObject
+public class CreateAd : PageModel
 {
     private DatabaseContext DatabaseContext { get; set; }
     private string? _invalidModelState;
@@ -24,6 +24,9 @@ public class CreateAd : PageModel, IValidatableObject
 
     [BindProperty]
     public SellAd SellAd { get; set; }
+    
+    public string TitleError { get; set; }
+    public string DescriptionError { get; set; }
 
     public CreateAd(DatabaseContext databaseContext, ILogger<CreateAd> logger)
     {
@@ -36,17 +39,77 @@ public class CreateAd : PageModel, IValidatableObject
     public IActionResult OnPost()
     {
         Ad ad;
-        var user = DatabaseContext.Users.FirstOrDefault(u => u.Username == TheUser.Username.Trim());
-        if (user == null)
+        
+        // Assign the type of ad to the ad variable.
+        if (BuyOrSell == 1)
         {
-            _logger.LogInformation("A user with username {Username} does not exist", TheUser.Username);
-            return Page();
+            ad = BuyAd;
+        }
+        else
+        {
+            ad = SellAd;
         }
 
-        if (user.Password != TheUser.Password.Trim())
+        if (string.IsNullOrWhiteSpace(TheUser.Username))
         {
+            ModelState.AddModelError("TheUser.Username", "Du måste skriva in ditt användarnamn.");
+            _logger.LogInformation("Username in the form is null or empty");
+        }
+        
+        if (string.IsNullOrWhiteSpace(TheUser.Password))
+        {
+            ModelState.AddModelError("TheUser.Password", "Du måste skriva in ditt lösenord.");
+            _logger.LogInformation("Password in the form is null or empty");
+        }
+
+        User? user = null;
+        if (!string.IsNullOrWhiteSpace(TheUser.Username))
+        {
+            user = DatabaseContext.Users.FirstOrDefault(u => u.Username == TheUser.Username.Trim());    
+        }
+        
+        if (BuyOrSell != 1 && BuyOrSell != 2)
+        {
+            ModelState.ClearValidationState("BuyOrSell");
+               ModelState.AddModelError("BuyOrSell", "Du måste välja om du vill köpa eller sälja.");
+            _logger.LogInformation("Buy or Sell is not chosen");
+        }
+
+        if (Category == 0)
+        {
+            ModelState.ClearValidationState("Category");
+            ModelState.AddModelError("Category", "Du måste välja en kategori.");
+            _logger.LogInformation("Category is not chosen");
+        }
+        
+        if (user == null)
+        {
+            ModelState.AddModelError("TheUser.Username", "Det finns ingen med det användarnamnet.");
+            _logger.LogInformation("A user with username {Username} does not exist", TheUser.Username);
+        }
+
+        if (!string.IsNullOrWhiteSpace(TheUser.Password) && user.Password != TheUser.Password.Trim())
+        {
+            ModelState.AddModelError("TheUser.Password", "Du har skrivit in fel lösenord.");
             _logger.LogInformation("The password you have entered, {Password}, does not match the password of user {Username}", TheUser.Password, TheUser.Username);
         }
+
+        if ((ad is BuyAd && string.IsNullOrWhiteSpace(BuyAd.Title)) || ad is SellAd && string.IsNullOrWhiteSpace(SellAd.Title))
+        {
+            ModelState.ClearValidationState("Title");
+            ModelState.AddModelError("Title", "Du måste skriva in en rubrik.");
+            _logger.LogInformation("Title in the form is null or empty");
+            TitleError = ModelState["Title"].Errors[0].ErrorMessage;
+        }
+        
+        if ((ad is BuyAd && string.IsNullOrWhiteSpace(BuyAd.Description)) || ad is SellAd && string.IsNullOrWhiteSpace(SellAd.Description))
+        {
+            ModelState.ClearValidationState("Description");
+            ModelState.AddModelError("Description", "Du måste skriva in en beskrivning.");
+            _logger.LogInformation("Description in the form is null or empty");
+            DescriptionError = ModelState["Description"].Errors[0].ErrorMessage;
+        }
+        
         if (!ModelState.IsValid)
         {
             var errors = ModelState
@@ -65,15 +128,7 @@ public class CreateAd : PageModel, IValidatableObject
             return Page();
         }
 
-        if (BuyOrSell == 1)
-        {
-            ad = BuyAd;
-        }
-        else
-        {
-            ad = SellAd;
-        }
-
+        // Assign the type of Category to the ad.
         if (Category == 1)
         {
             ad.Category = "motorboat";
@@ -87,6 +142,7 @@ public class CreateAd : PageModel, IValidatableObject
             ad.Category = "other";
         }
 
+        // Add the ad to the user's list of Buy Ads and Sell Ads respectively, depending on whether it's a BuyAd or a SellAd.
         if (ad is BuyAd buyAd)
         {
             user.BuyAds.Add(buyAd);
@@ -107,24 +163,5 @@ public class CreateAd : PageModel, IValidatableObject
     public void OnGet()
     {
         
-    }
-
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-    {
-        if (BuyOrSell != 1 && BuyOrSell != 2)
-        {
-            yield return new ValidationResult("Du måste välja om du vill köpa eller sälja.",
-                new[] { nameof(BuyOrSell) });
-        }
-
-        if (BuyOrSell == 1 && BuyAd == null)
-        {
-            yield return new ValidationResult("Du måste ange information för en köp-annons.", new[] { nameof(BuyAd) });
-        }
-        
-        if (BuyOrSell == 2 && SellAd == null)
-        {
-            yield return new ValidationResult("Du måste ange information för en sälj-annons.", new[] { nameof(SellAd) });
-        }
     }
 }
