@@ -2,18 +2,38 @@
 @model Server.Pages.SeeYourAds
 
 @{
-    Layout = null;
+    Layout = "/Pages/Shared/_Layout.cshtml";
+}
+@{
+    ViewData["Title"] = "SeeYourAds";
 }
 
 <!DOCTYPE html>
 
 <html>
-<head>
-    <title></title>
+    <body id="textDiv">
+        <head>
+    <title>Se dina anonnser</title>
+    <link rel="stylesheet" href="css/CreateAd.css">
 </head>
-<body>
-<div>
-    
+</body>
+
+<body id="background">
+<div id="textDiv">
+    <h1 class="display-4">Logga in för att se dina annonser</h1>
+    <form method="post">
+        <div class="container">
+            
+            <div class="box"><label for="Username">Användarnamn</label></div>
+            <div class="box"><input id="Username" name="Username" type="Text"/></div>
+            <div class="box"><label for="Password">Lösenord</label></div>
+            <div class="box"><input id="Password" name="Password" type="Text"/></div>
+            
+            <div class="box"><input type="submit" value="Se dina annonser" name="submit"></div>
+        </div>
+    </form>
+
+
 </div>
 </body>
 </html>
