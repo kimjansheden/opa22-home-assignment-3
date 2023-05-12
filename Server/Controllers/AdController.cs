@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.Models;
 
@@ -9,21 +10,10 @@ namespace Server.Controllers;
 public class AdController : ControllerBase
 {
     private DatabaseContext _db;
+    private List<User> Users { get; set; }
 
     public AdController(DatabaseContext db)
     {
         _db = db;
-    }
-
-    [Route("get")]
-    [HttpGet]
-    public ActionResult<Ad> GetUser(int id)
-    {
-        User user = _db.Users.Find(id);
-        if (user == null)
-        {
-            return BadRequest();
-        }
-        return Ok(user);
     }
 }

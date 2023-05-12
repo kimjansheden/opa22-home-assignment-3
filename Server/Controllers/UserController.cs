@@ -1,0 +1,51 @@
+using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Server.Data;
+using Server.Models;
+
+namespace Server.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class UserController : ControllerBase
+{
+    private readonly ILogger<UserController> _logger;
+    private DatabaseContext _db;
+    private List<User> Users { get; set; }
+
+    public UserController(DatabaseContext db, ILogger<UserController> logger)
+    {
+        _db = db;
+        _logger = logger;
+    }
+    
+    // Denna är bara för test, ska tas bort. Man ska inte kunna plocka ut alla users.
+    [HttpGet]
+    public List<User> GetUsers()
+    {
+        Users = _db.Users.Include(p => p.BuyAds).Include(p => p.SellAds).ToList();
+        return Users;
+    }
+
+    [Route("get")]
+    [HttpPost]
+    public IActionResult GetUser([FromBody] UserLoginRequest request)
+    {
+        _logger.LogInformation("Attempting to log in");
+        User? user = _db.Users.Include(u => u.BuyAds).Include(u => u.SellAds).FirstOrDefault(u => u.Username == request.Username.Trim());
+        if (user == null)
+        {
+            _logger.LogInformation("A user with username {Username} does not exist", request.Username);
+            return BadRequest(new { message = "A user with this username does not exist" });
+        }
+        if (user.Password != request.Password.Trim())
+        {
+            _logger.LogInformation("The password you have entered, {Password}, does not match the password of user {Username}", request.Password, request.Username);
+            return BadRequest(new { message = "Incorrect password" });
+        }
+        
+        _logger.LogInformation("{User} successfully logged in", request.Username);
+        return Ok(JsonSerializer.Serialize(user));
+    }
+}
