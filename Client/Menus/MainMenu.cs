@@ -32,8 +32,9 @@ public class MainMenu : ISpecificMenu
             .Append("Press \"q\" to quit.").AppendLine()
             .Append("Press \"m\" for Main Menu.").AppendLine()
             .Append(menuCounter += 1).Append(": Registrera användare").AppendLine() // POST
-            .Append(menuCounter += 1).Append(": ").Append(LoginStateString).AppendLine()
+            .Append(menuCounter += 1).Append(": ").Append(LoginStateString).AppendLine() // POST
             .Append(menuCounter += 1).Append(": Se dina annonser").AppendLine() // GET
+            .Append(menuCounter += 1).Append(": Se alla annonser").AppendLine() // GET
             .Append(menuCounter += 1).Append(": Redigera annons").AppendLine() // PUT
             .Append(menuCounter += 1).Append(": Radera annons").AppendLine() // DELETE
             .Append(menuCounter += 1).Append(": Lägg upp ny annons").AppendLine(); // POST

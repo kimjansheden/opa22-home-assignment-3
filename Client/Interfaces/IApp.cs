@@ -12,6 +12,7 @@ public interface IApp
     ICommandExecutor CommandExecutor { get; set; }
     string GetUserByUsernameUri { get; set; }
     string GetAdByIdUri { get; set; }
+    string DefaultApiUri { get; set; }
     LoginState LoginState { get; set; }
     Dictionary<string, LoginState> LoginStates { get; set; }
     int AmountOfOptions { get; set; }

@@ -33,6 +33,7 @@ public class UserController : ControllerBase
     public IActionResult GetUser([FromBody] UserLoginRequest request)
     {
         _logger.LogInformation("Attempting to log in");
+        
         User? user = _db.Users.Include(u => u.BuyAds).Include(u => u.SellAds).FirstOrDefault(u => u.Username == request.Username.Trim());
         if (user == null)
         {

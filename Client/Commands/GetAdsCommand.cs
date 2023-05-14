@@ -1,5 +1,8 @@
+using System.Net.Http.Json;
+using System.Text.Json;
 using Client.Exceptions;
 using Client.Interfaces;
+using Client.Models;
 
 namespace Client.Commands;
 
@@ -15,18 +18,77 @@ public class GetAdsCommand : ICommand
     }
     public async Task Execute()
     {
-        // Make sure the user is logged in.
-        try
-        {
-            _app.LoginState.LoginLogoutHandle(this);
-        }
-        catch (NotLoggedInException e)
-        {
-            Console.WriteLine(e.Message);
-            return;
-        }
+        // Makes sure anything is not null, so we have every information we need.
+        CheckPropertiesForNull();
         
-        _app.CurrentUser.PrintInfo();
+        var buyAds = await GetBuyAds();
+        var sellAds = await GetSellAds();
+
+        // Print BuyAds
+        if (buyAds != null)
+        {
+            Console.WriteLine("Buy Ads");
+            Console.WriteLine();
+            foreach (var ad in buyAds)
+            {
+                Console.WriteLine(ad.Title);
+                Console.WriteLine();
+                Console.Write($"Id: {ad.Id}. Category: {ad.Category}. Length: {ad.Length}. Time created: {ad.TimeCreated}. Price: {ad.Price}");
+                Console.WriteLine("Description:");
+                Console.WriteLine(ad.Description);
+                Console.WriteLine();
+            }
+        }
+
+        // Print SellAds
+        if (sellAds != null)
+        {
+            Console.WriteLine("Sell Ads");
+            Console.WriteLine();
+            foreach (var ad in sellAds)
+            {
+                Console.WriteLine(ad.Title);
+                Console.WriteLine();
+                Console.Write($"Id: {ad.Id}. Category: {ad.Category}. Length: {ad.Length}. Time created: {ad.TimeCreated}. Price: {ad.Price}");
+                Console.WriteLine("Description:");
+                Console.WriteLine(ad.Description);
+                Console.WriteLine();
+            }
+        }
+    }
+
+    private async Task<List<BuyAd>> GetBuyAds()
+    {
+        _app.CurrentUri = new Uri(_app.DefaultApiUri + "ad/buyads");
+        UpdateUri();
+        string jsonString = "";
+        HttpResponseMessage response = await _client.GetAsync(_uri);
+
+        jsonString = await response.Content.ReadAsStringAsync();
+
+        List<BuyAd>? buyAds = JsonSerializer.Deserialize<List<BuyAd>>(jsonString, new JsonSerializerOptions()
+        {
+            PropertyNameCaseInsensitive = true
+        });
+
+        return buyAds;
+    }
+    
+    private async Task<List<SellAd>> GetSellAds()
+    {
+        _app.CurrentUri = new Uri(_app.DefaultApiUri + "ad/sellads");
+        UpdateUri();
+        string jsonString = "";
+        HttpResponseMessage response = await _client.GetAsync(_uri);
+
+        jsonString = await response.Content.ReadAsStringAsync();
+
+        List<SellAd>? sellAds = JsonSerializer.Deserialize<List<SellAd>>(jsonString, new JsonSerializerOptions()
+        {
+            PropertyNameCaseInsensitive = true
+        });
+
+        return sellAds;
     }
 
     private void UpdateUri()

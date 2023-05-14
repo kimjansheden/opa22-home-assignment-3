@@ -23,7 +23,7 @@ public class EditAdCommand : ICommand
         // Make sure the user is logged in.
         try
         {
-            _app.LoginState.LoginLogoutHandle(this);
+            _app.LoginState.RequestHandle(this);
         }
         catch (NotLoggedInException e)
         {

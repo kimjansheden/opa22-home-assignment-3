@@ -12,7 +12,7 @@ public class App : IApp
 {
     private IMenu Menu { get; set; }
     public ISpecificMenu MainMenu { get; set; }
-    private string DefaultApiUri { get; set; }
+    public string DefaultApiUri { get; set; }
     private Uri ServerUri { get; set; }
     private Dictionary<string, ILoginStateFactory> _loginStateFactories;
     public string GetUserByUsernameUri { get; set; }
@@ -32,15 +32,17 @@ public class App : IApp
 
     public App()
     {
+        var menuCounter = 0;
         // The reason why we don't send other variables directly to the constructors of the commands is that we don't have those variables ready at this stage. That's why we do Initialize later, as we get those variables needed.
         Commands = new Dictionary<string, ICommand>
         {
-            {"1", new AddUserCommand(this)},
-            {"2", new LoginLogoutCommand(this)},
-            {"3", new GetAdsCommand(this)},
-            {"4", new EditAdCommand(this)},
-            {"5", new DeleteAdCommand(this)},
-            {"6", new AddAdCommand(this)},
+            {$"{menuCounter += 1}", new AddUserCommand(this)},
+            {$"{menuCounter += 1}", new LoginLogoutCommand(this)},
+            {$"{menuCounter += 1}", new GetYourAdsCommand(this)},
+            {$"{menuCounter += 1}", new GetAdsCommand(this)},
+            {$"{menuCounter += 1}", new EditAdCommand(this)},
+            {$"{menuCounter += 1}", new DeleteAdCommand(this)},
+            {$"{menuCounter += 1}", new AddAdCommand(this)},
             {"m", new MainMenuCommand(this)},
             {"q", new QuitCommand()}
         };

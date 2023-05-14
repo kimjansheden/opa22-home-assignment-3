@@ -11,19 +11,26 @@ public class LoggedInState : LoginState
     {
     }
 
-    protected internal override void LoginLogoutHandle(ICommand currentCommand)
+    protected internal override void LoginLogoutHandle()
     {
-        if (currentCommand is LoginLogoutCommand)
-        {
-            LogOut();
-        }
+        LogOut();
+    }
+
+    protected internal override void RequestHandle(ICommand currentCommand)
+    {
+        
+    }
+
+    protected internal override LoginState Initialize(IApp app)
+    {
+        return this;
     }
 
     private void LogOut()
     {
         App.LoginState = App.LoginStates["LoggedOut"];
         App.CurrentUser.LoggedIn = false;
-        throw new NotLoggedOutException("You are now logged out.");
+        Console.WriteLine("You are now logged out.");
     }
     
 }
