@@ -1,6 +1,4 @@
-using System.Net.Http.Json;
 using System.Text.Json;
-using Client.Exceptions;
 using Client.Interfaces;
 using Client.Models;
 
@@ -31,12 +29,7 @@ public class GetAdsCommand : ICommand
             Console.WriteLine();
             foreach (var ad in buyAds)
             {
-                Console.WriteLine(ad.Title);
-                Console.WriteLine();
-                Console.Write($"Id: {ad.Id}. Category: {ad.Category}. Length: {ad.Length}. Time created: {ad.TimeCreated}. Price: {ad.Price}");
-                Console.WriteLine("Description:");
-                Console.WriteLine(ad.Description);
-                Console.WriteLine();
+                PrintAds(ad);
             }
         }
 
@@ -47,14 +40,20 @@ public class GetAdsCommand : ICommand
             Console.WriteLine();
             foreach (var ad in sellAds)
             {
-                Console.WriteLine(ad.Title);
-                Console.WriteLine();
-                Console.Write($"Id: {ad.Id}. Category: {ad.Category}. Length: {ad.Length}. Time created: {ad.TimeCreated}. Price: {ad.Price}");
-                Console.WriteLine("Description:");
-                Console.WriteLine(ad.Description);
-                Console.WriteLine();
+                PrintAds(ad);
             }
         }
+    }
+
+    private void PrintAds(Ad ad)
+    {
+        Console.WriteLine(ad.Title);
+        Console.WriteLine();
+        Console.Write(
+            $"Id: {ad.Id}. Category: {ad.Category}. Length: {ad.Length} cm. Time created: {ad.TimeCreated}. Price: {ad.Price} kr. ");
+        Console.WriteLine("Description:");
+        Console.WriteLine(ad.Description);
+        Console.WriteLine();
     }
 
     private async Task<List<BuyAd>> GetBuyAds()

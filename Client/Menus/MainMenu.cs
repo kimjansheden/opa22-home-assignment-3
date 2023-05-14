@@ -9,7 +9,7 @@ public class MainMenu : ISpecificMenu
     private string _menuString;
     private IApp _app;
     
-    protected virtual string LoginStateString { get; private set; }
+    protected virtual string LoginStateString { get; set; }
 
     public MainMenu(IApp app)
     {

@@ -1,8 +1,4 @@
-using System.Net.Http.Json;
-using System.Text.Json;
-using Client.Exceptions;
 using Client.Interfaces;
-using Client.Models;
 
 namespace Client.Commands;
 
@@ -15,7 +11,7 @@ public class LoginLogoutCommand : ICommand
     }
     public async Task Execute()
     {
-        _app.LoginState.LoginLogoutHandle();
+        await _app.LoginState.LoginLogoutHandle();
     }
 
     public ICommand Initialize(IApp app)

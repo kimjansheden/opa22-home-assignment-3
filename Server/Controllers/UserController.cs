@@ -28,6 +28,7 @@ public class UserController : ControllerBase
         return Users;
     }
 
+    // Authenticate the credentials received from the POST request and return the User object including all ads to the requester.
     [Route("get")]
     [HttpPost]
     public IActionResult GetUser([FromBody] UserLoginRequest request)

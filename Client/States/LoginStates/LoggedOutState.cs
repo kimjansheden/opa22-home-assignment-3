@@ -17,7 +17,7 @@ public class LoggedOutState : LoginState
         
     }
 
-    protected internal override async void LoginLogoutHandle()
+    protected internal override async Task LoginLogoutHandle()
     {
         await AttemptLogin();
     }
@@ -92,10 +92,12 @@ public class LoggedOutState : LoginState
         catch (HttpRequestException e)
         {
             Console.WriteLine($"Request exception: {e.Message}");
+            return;
         }
         catch (Exception e)
         {
             Console.WriteLine($"General exception: {e.Message}");
+            return;
         }
         
         App.LoginState = App.LoginStates["LoggedIn"];

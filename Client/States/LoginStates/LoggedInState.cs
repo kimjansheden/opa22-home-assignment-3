@@ -1,6 +1,4 @@
 using Client.AbstractClasses;
-using Client.Commands;
-using Client.Exceptions;
 using Client.Interfaces;
 
 namespace Client.States.LoginStates;
@@ -11,9 +9,9 @@ public class LoggedInState : LoginState
     {
     }
 
-    protected internal override void LoginLogoutHandle()
+    protected internal override async Task LoginLogoutHandle()
     {
-        LogOut();
+        await LogOut();
     }
 
     protected internal override void RequestHandle(ICommand currentCommand)
@@ -26,11 +24,12 @@ public class LoggedInState : LoginState
         return this;
     }
 
-    private void LogOut()
+    private Task LogOut()
     {
         App.LoginState = App.LoginStates["LoggedOut"];
         App.CurrentUser.LoggedIn = false;
         Console.WriteLine("You are now logged out.");
+        return Task.CompletedTask;
     }
     
 }
