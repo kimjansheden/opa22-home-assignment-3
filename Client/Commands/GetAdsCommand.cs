@@ -31,7 +31,7 @@ public class GetAdsCommand : ICommand
             Console.WriteLine();
             foreach (var ad in buyAds)
             {
-                ad.PrintAds();
+                ad.PrintAd();
             }
         }
 
@@ -42,7 +42,7 @@ public class GetAdsCommand : ICommand
             Console.WriteLine();
             foreach (var ad in sellAds)
             {
-                ad.PrintAds();
+                ad.PrintAd();
             }
         }
     }

@@ -1,8 +1,6 @@
 using System.Net.Http.Json;
-using System.Text.Json;
 using Client.Exceptions;
 using Client.Interfaces;
-using Client.Models;
 using Uri = System.Uri;
 
 namespace Client.Commands;
@@ -33,12 +31,23 @@ public class DeleteAdCommand : ICommand
         
         // Makes sure anything is not null, so we have every information we need.
         CheckPropertiesForNull();
+        
+        // Prompt the user for the required data.
+        var (adID, buyAd) = await _app.Helper.PromptForDeleteAd();
+        
+        // If everything from the Helper Method is null: abort.
+        if (adID == 0 && buyAd == null)
+        {
+            return;
+        }
+
+        await DeleteAd(adID, buyAd);
     }
 
     public ICommand Initialize(IApp app)
     {
         _client = app.Client;
-        _uri = new Uri("https://localhost:7242/api/ad/delete");
+        _uri = new Uri(_app.DefaultApiUri + "ad/DeleteAd");
         _commandExecutor = app.CommandExecutor;
         return this;
     }
@@ -49,5 +58,19 @@ public class DeleteAdCommand : ICommand
         {
             Initialize(_app);
         }
+    }
+    
+    private async Task DeleteAd(int adId, bool? buyAd)
+    {
+        var postData = new
+        {
+            Username = _app.CurrentUser.Username,
+            Password = _app.CurrentUser.Password,
+            Id = adId,
+            BuyAd = buyAd
+        };
+        
+        HttpResponseMessage response = await _client.PostAsJsonAsync(_uri, postData);
+        Console.WriteLine(response.StatusCode);
     }
 }

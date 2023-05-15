@@ -35,18 +35,18 @@ public class User
         if (SellAds.Count != 0)
         {
             Console.WriteLine("Sell Ads");
-            foreach (SellAd sellAd in SellAds)
+            foreach (SellAd ad in SellAds)
             {
-                Console.WriteLine(sellAd.Title + " ");
+                ad.PrintAd();
             }
 
             if (BuyAds.Count != 0)
             {
                 Console.WriteLine();
                 Console.WriteLine("Buy Ads");
-                foreach (BuyAd buyAd in BuyAds)
+                foreach (BuyAd ad in BuyAds)
                 {
-                    Console.WriteLine(buyAd.Title + " ");
+                    ad.PrintAd();
                 }   
             }
         }
