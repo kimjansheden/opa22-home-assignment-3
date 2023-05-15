@@ -34,8 +34,8 @@ public class AddAdCommand : ICommand
         CheckPropertiesForNull();
 
         var (description, title, category, buyAd, price, length) = await _app.Helper.PromptForAdData();
-
-        var postData = new
+        
+        var putData = new
         {
             Username = _app.CurrentUser.Username,
             Password = _app.CurrentUser.Password,
@@ -46,7 +46,7 @@ public class AddAdCommand : ICommand
             Price = price,
             Length = length
         };
-        HttpResponseMessage response = await _client.PostAsJsonAsync(_uri, postData);
+        HttpResponseMessage response = await _client.PostAsJsonAsync(_uri, putData);
         Console.WriteLine(response.StatusCode);
     }
 
