@@ -18,7 +18,7 @@ public class GetYourAdsCommand : ICommand
     }
     public async Task Execute()
     {
-        // Make sure the user is logged in.
+        // Check if the user is logged in.
         try
         {
             _app.LoginState.RequestHandle(this);

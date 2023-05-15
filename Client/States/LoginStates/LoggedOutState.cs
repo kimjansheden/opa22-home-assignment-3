@@ -52,7 +52,7 @@ public class LoggedOutState : LoginState
 
     private async Task AttemptLogin()
     {
-        var (username, password) = PromptForCredentials();
+        var (username, password) = Helper.PromptForCredentials();
         App.CurrentUri = new Uri(App.GetUserByUsernameUri);
         
         // Makes sure anything is not null, so we have every information we need.
@@ -102,28 +102,6 @@ public class LoggedOutState : LoginState
         
         App.LoginState = App.LoginStates["LoggedIn"];
         App.CurrentUser.LoggedIn = true;
-    }
-
-    private (string, string) PromptForCredentials()
-    {
-        string? password = "";
-        string? username = "";
-        while (string.IsNullOrWhiteSpace(username) && string.IsNullOrWhiteSpace(password))
-        {
-            Console.WriteLine("Enter Username.");
-            username = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(username))
-            {
-                Console.WriteLine("You must write a username.");
-            }
-            Console.WriteLine("Enter Password.");
-            password = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(username))
-            {
-                Console.WriteLine("You must write a password.");
-            }
-        }
-        return (username, password);
     }
 
     private void MustBeLoggedIn()

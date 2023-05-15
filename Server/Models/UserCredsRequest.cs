@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Server.Models;
 
-public class UserLoginRequest
+public class UserCredsRequest
 {
     [Required]
     public string Username { get; set; }

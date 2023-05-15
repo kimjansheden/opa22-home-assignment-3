@@ -29,6 +29,7 @@ public class App : IApp
     public Uri CurrentUri { get; set; }
     public ICommand CurrentCommand { get; set; }
     public Dictionary<string, ICommand> Commands { get; set; }
+    public Helper Helper { get; }
 
     public App()
     {
@@ -47,6 +48,7 @@ public class App : IApp
             {"q", new QuitCommand()}
         };
 
+        Helper = new Helper();
         AmountOfOptions = Commands.Count - 2;
         CreateDefaultStates();
         Menu = new Menu(this);

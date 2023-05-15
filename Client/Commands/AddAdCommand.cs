@@ -1,6 +1,8 @@
 using System.Net.Http.Json;
 using Client.Exceptions;
+using Client.Helpers;
 using Client.Interfaces;
+using Uri = System.Uri;
 
 namespace Client.Commands;
 
@@ -16,7 +18,7 @@ public class AddAdCommand : ICommand
     }
     public async Task Execute()
     {
-        // Make sure the user is logged in.
+        // Check if the user is logged in.
         try
         {
             _app.LoginState.RequestHandle(this);
@@ -27,25 +29,27 @@ public class AddAdCommand : ICommand
             return;
         }
         
+        _app.CurrentUri = new Uri(_app.DefaultApiUri + "user/new");
+        UpdateUri();
         // Makes sure anything is not null, so we have every information we need.
         CheckPropertiesForNull();
-        
-        // Post
-        Console.WriteLine("What skill do you want to add?");
-        var skillToAdd = Console.ReadLine();
-        Console.WriteLine("To which ID?");
-        int.TryParse(Console.ReadLine(), out int idToAddSkillTo);
 
-        var postData = new { Id = idToAddSkillTo, SkillName = skillToAdd };
-        HttpResponseMessage response2 = await _client.PostAsJsonAsync(_uri, postData);
-        Console.WriteLine(response2.StatusCode);
+        var (username, password) = _app.Helper.PromptForCredentials();
+
+        var postData = new { Username = username, Password = password };
+        HttpResponseMessage response = await _client.PostAsJsonAsync(_uri, postData);
+        Console.WriteLine(response.StatusCode);
     }
 
     public ICommand Initialize(IApp app)
     {
         _client = app.Client;
-        _uri = new Uri("https://localhost:7242/api/Person/AddSkill");
+        _uri = app.CurrentUri;
         return this;
+    }
+    private void UpdateUri()
+    {
+        _uri = _app.CurrentUri;
     }
     
     private void CheckPropertiesForNull()

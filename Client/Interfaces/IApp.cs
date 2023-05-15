@@ -1,4 +1,5 @@
 using Client.AbstractClasses;
+using Client.Helpers;
 using Client.Models;
 
 namespace Client.Interfaces;
@@ -19,5 +20,6 @@ public interface IApp
     User CurrentUser { get; internal set; }
     State CurrentState { get; set; }
     ISpecificMenu MainMenu { get; set; }
+    Helper Helper { get; }
     Task Run();
 }

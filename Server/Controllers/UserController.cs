@@ -31,7 +31,7 @@ public class UserController : ControllerBase
     // Authenticate the credentials received from the POST request and return the User object including all ads to the requester.
     [Route("get")]
     [HttpPost]
-    public IActionResult GetUser([FromBody] UserLoginRequest request)
+    public IActionResult GetUser([FromBody] UserCredsRequest request)
     {
         _logger.LogInformation("Attempting to log in");
         
@@ -49,5 +49,21 @@ public class UserController : ControllerBase
         
         _logger.LogInformation("{User} successfully logged in", request.Username);
         return Ok(JsonSerializer.Serialize(user));
+    }
+
+    [Route("new")]
+    [HttpPost]
+    public IActionResult AddUser([FromBody] UserCredsRequest request)
+    {
+        User? user = new User(username: request.Username, password: request.Password);
+        if (user == null || string.IsNullOrWhiteSpace(user.Username) || string.IsNullOrWhiteSpace(user.Password))
+        {
+            _logger.LogInformation("Error. User creds missing. User = {User}, Username = {Username}, Password = {Password}", user, request.Username, request.Password);
+            return BadRequest(new { message = "Incomplete User Credentials" });
+        }
+        _db.Users.Add(user);
+        _db.SaveChanges();
+        _logger.LogInformation("User {User} was created successfully", request.Username);
+        return Ok();
     }
 }
