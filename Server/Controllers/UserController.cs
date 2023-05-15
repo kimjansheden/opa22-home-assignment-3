@@ -47,7 +47,7 @@ public class UserController : ControllerBase
             return BadRequest(new { message = "Incorrect password" });
         }
         
-        _logger.LogInformation("{User} successfully logged in", request.Username);
+        _logger.LogInformation("{User} successfully authenticated", request.Username);
         return Ok(JsonSerializer.Serialize(user));
     }
 
