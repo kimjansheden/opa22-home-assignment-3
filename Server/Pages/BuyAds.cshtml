@@ -2,18 +2,33 @@
 @model Server.Pages.BuyAds
 
 @{
-    Layout = null;
+    Layout = "/Pages/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
+<html lang="en">
 
-<html>
 <head>
-    <title></title>
+    <title>Sell Ad</title>
+    <style>
+        .sell-ad {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 300px;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+    </style>
 </head>
+
 <body>
-<div>
-    
-</div>
+    <div class="sell-ad">
+        <h3>For Sale: Product Name</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod est id scelerisque fermentum. Sed at
+            malesuada nisl, vitae pharetra enim.</p>
+        <p>Price: $99.99</p>
+        <p>Contact: example@example.com</p>
+    </div>
 </body>
+
 </html>
