@@ -30,4 +30,19 @@ public abstract class Ad
         Active = true;
         TimeCreated = DateTime.Now;
     }
+    
+    public void PrintAds()
+    {
+        var lengthStr = this.Length != null ? $" Length: {this.Length} cm." : string.Empty;
+        var priceStr = this.Price != null ? $" Price: {this.Price} kr. " : string.Empty;
+        
+        Console.WriteLine(this.Title);
+        Console.WriteLine();
+        Console.Write(
+            $"Id: {this.Id}. Category: {this.Category}.{lengthStr} Time created: {this.TimeCreated}.{priceStr}");
+        Console.WriteLine();
+        Console.Write($"Description: {this.Description}");
+        Console.WriteLine();
+        Console.WriteLine();
+    }
 }

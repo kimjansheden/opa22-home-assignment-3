@@ -29,7 +29,7 @@ public class GetAdsCommand : ICommand
             Console.WriteLine();
             foreach (var ad in buyAds)
             {
-                PrintAds(ad);
+                ad.PrintAds();
             }
         }
 
@@ -40,20 +40,9 @@ public class GetAdsCommand : ICommand
             Console.WriteLine();
             foreach (var ad in sellAds)
             {
-                PrintAds(ad);
+                ad.PrintAds();
             }
         }
-    }
-
-    private void PrintAds(Ad ad)
-    {
-        Console.WriteLine(ad.Title);
-        Console.WriteLine();
-        Console.Write(
-            $"Id: {ad.Id}. Category: {ad.Category}. Length: {ad.Length} cm. Time created: {ad.TimeCreated}. Price: {ad.Price} kr. ");
-        Console.WriteLine("Description:");
-        Console.WriteLine(ad.Description);
-        Console.WriteLine();
     }
 
     private async Task<List<BuyAd>> GetBuyAds()
