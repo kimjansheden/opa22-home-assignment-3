@@ -1,6 +1,5 @@
 using System.Net.Http.Json;
 using Client.Exceptions;
-using Client.Helpers;
 using Client.Interfaces;
 using Uri = System.Uri;
 

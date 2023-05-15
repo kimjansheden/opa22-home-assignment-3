@@ -1,6 +1,5 @@
 using System.Net.Http.Json;
 using Client.Exceptions;
-using Client.Helpers;
 using Client.Interfaces;
 using Uri = System.Uri;
 
@@ -29,14 +28,24 @@ public class AddAdCommand : ICommand
             return;
         }
         
-        _app.CurrentUri = new Uri(_app.DefaultApiUri + "user/new");
+        _app.CurrentUri = new Uri(_app.DefaultApiUri + "ad/new");
         UpdateUri();
         // Makes sure anything is not null, so we have every information we need.
         CheckPropertiesForNull();
 
-        var (username, password) = _app.Helper.PromptForCredentials();
+        var (description, title, category, buyAd, price, length) = await _app.Helper.PromptForAdData();
 
-        var postData = new { Username = username, Password = password };
+        var postData = new
+        {
+            Username = _app.CurrentUser.Username,
+            Password = _app.CurrentUser.Password,
+            BuyAd = buyAd,
+            Title = title,
+            Description = description,
+            Category = category,
+            Price = price,
+            Length = length
+        };
         HttpResponseMessage response = await _client.PostAsJsonAsync(_uri, postData);
         Console.WriteLine(response.StatusCode);
     }
