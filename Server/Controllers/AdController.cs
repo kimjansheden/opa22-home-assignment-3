@@ -73,7 +73,8 @@ public class AdController : ControllerBase
             ad = new SellAd();
         }
 
-        if (createAdRequest.Category != "motorboat" || createAdRequest.Category != "sailboat" || createAdRequest.Category != "other")
+        // Verify that the correct category is received.
+        if (!(createAdRequest.Category == "motorboat" || createAdRequest.Category == "sailboat" || createAdRequest.Category == "other"))
         {
             _logger.LogInformation("Wrong category, {Category}, is not allowed", createAdRequest.Category);
             return BadRequest(new { message = "Category not allowed" });

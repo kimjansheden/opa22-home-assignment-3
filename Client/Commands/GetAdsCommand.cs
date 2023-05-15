@@ -22,6 +22,8 @@ public class GetAdsCommand : ICommand
         var buyAds = await GetBuyAds();
         var sellAds = await GetSellAds();
 
+        Console.WriteLine($"There are currently {buyAds.Count + sellAds.Count} ads on the site.");
+        
         // Print BuyAds
         if (buyAds != null)
         {

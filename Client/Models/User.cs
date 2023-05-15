@@ -29,7 +29,8 @@ public class User
     
     public void PrintInfo()
     {
-        Console.Write("Id: " + Id + ", Name: " + Username + ", Ads: ");
+        Console.Write("Id: " + Id + ", Name: " + Username + ". You have " + (BuyAds.Count + SellAds.Count) + " ads. These are: ");
+        Console.WriteLine();
         Console.WriteLine();
         if (SellAds.Count != 0)
         {

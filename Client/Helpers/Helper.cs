@@ -99,7 +99,7 @@ public class Helper
         }
 
         // Prompt for a Price.
-        Console.WriteLine("If you want to set a price, write the price. Otherwise just press Enter.");
+        Console.WriteLine("If you want to set a price, write the price in SEK. Otherwise just press Enter.");
         var priceSuccess = int.TryParse(Console.ReadLine(), out price);
         if (!priceSuccess)
         {
@@ -107,7 +107,7 @@ public class Helper
         }
             
         // Prompt for a Length.
-        Console.WriteLine("If you want to set a price, write the price. Otherwise just press Enter.");
+        Console.WriteLine("If you want to set a length, write the length in cm. Otherwise just press Enter.");
         var lengthSuccess = int.TryParse(Console.ReadLine(), out length);
         if (!lengthSuccess)
         {
