@@ -17,9 +17,8 @@ public class User
     public List<SellAd>? SellAds{ get; set; }
     public List<BuyAd>? BuyAds { get; set; }
 
-    public User(int id, string username, string password)
+    public User(string username, string password)
     {
-        Id = id;
         Username = username;
         Password = password;
         SellAds = new List<SellAd>();
