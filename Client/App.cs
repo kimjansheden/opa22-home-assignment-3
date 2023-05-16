@@ -48,7 +48,7 @@ public class App : IApp
             {"q", new QuitCommand()}
         };
 
-        Helper = new Helper();
+        Helper = new Helper(this);
         AmountOfOptions = Commands.Count - 2;
         CreateDefaultStates();
         Menu = new Menu(this);

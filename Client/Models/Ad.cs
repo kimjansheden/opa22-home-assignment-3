@@ -31,15 +31,14 @@ public abstract class Ad
         TimeCreated = DateTime.Now;
     }
     
-    public void PrintAds()
+    public void PrintAd()
     {
         var lengthStr = this.Length != null ? $" Length: {this.Length} cm." : string.Empty;
         var priceStr = this.Price != null ? $" Price: {this.Price} kr. " : string.Empty;
-        
-        Console.WriteLine(this.Title);
-        Console.WriteLine();
+                        
+        Console.WriteLine("ID: " + this.Id + " Title: " + this.Title + " ");
         Console.Write(
-            $"Id: {this.Id}. Category: {this.Category}.{lengthStr} Time created: {this.TimeCreated}.{priceStr}");
+            $"Category: {this.Category}.{lengthStr} Time created: {this.TimeCreated}.{priceStr}");
         Console.WriteLine();
         Console.Write($"Description: {this.Description}");
         Console.WriteLine();
