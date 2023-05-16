@@ -54,6 +54,18 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            <aside>
+                <div class="border-right" id="asideMenu" style="width: 200px;">
+                    <div class="list-group list-group-flush">
+                        <a class="list-group-item list-group-item-action" asp-area="" asp-page="/Index">@siteName</a>
+                        <a class="list-group-item list-group-item-action" asp-area="" asp-page="/BuyAds">Önskas köpa</a>
+                        <a class="list-group-item list-group-item-action" asp-area="" asp-page="/SellAds">Önskas sälja</a>
+                        <a class="list-group-item list-group-item-action" asp-area="" asp-page="/CreateAd">Skapa annons</a>
+                        <a class="list-group-item list-group-item-action" asp-area="" asp-page="/SeeYourAds">Se dina annonser</a>
+                    </div>
+                </div>
+            </aside>
+
             @RenderBody()
         </main>
     </div>
