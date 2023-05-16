@@ -23,3 +23,12 @@ body {
 footer {
     margin-top: auto;
 }
+
+.hide-aside {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.hide-aside:hover {
+    opacity: 1;
+}
