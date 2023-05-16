@@ -13,5 +13,13 @@ html {
 
 body {
   margin-bottom: 60px;
-  background-color: papayawhip;
+  background-color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+footer {
+    margin-top: auto;
 }

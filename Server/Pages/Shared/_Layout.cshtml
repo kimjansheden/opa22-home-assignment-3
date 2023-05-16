@@ -10,6 +10,19 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Server.styles.css" asp-append-version="true" />
+    <style>
+        .nav-link {
+            border: none;
+            color: inherit;
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-link:hover {
+            background-color: lightblue;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -22,16 +35,16 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
+                        <li class="nav-item ms-3">
                             <a class="nav-link text-dark" asp-area="" asp-page="/BuyAds">Önskas köpa</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item ms-3">
                             <a class="nav-link text-dark" asp-area="" asp-page="/SellAds">Önskas sälja</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item ms-3">
                             <a class="nav-link text-dark" asp-area="" asp-page="/CreateAd">Skapa annons</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item ms-3">
                             <a class="nav-link text-dark" asp-area="" asp-page="/SeeYourAds">Se dina annonser</a>
                         </li>
                     </ul>
