@@ -1,8 +1,20 @@
 @page
+@using Server.Models
 @model Server.Pages.BuyAds
+
 
 @{
     Layout = "/Pages/Shared/_Layout.cshtml";
+}
+@foreach(BuyAd buyAd in Model.AllBuyAds)
+{
+        <div class="sell-ad">
+            <h3>@buyAd.Title</h3>
+            <p>Beskrivning: @buyAd.Description</p>
+            <p>Pris: @buyAd.Price </p>
+            <p>Längd: @buyAd.Length</p>
+            <p>Kontakt:</p>
+        </div>
 }
 
 <!DOCTYPE html>
@@ -22,11 +34,6 @@
 </head>
 
 <body>
-    <div class="sell-ad">
-        <h3>Beskrivning: </h3>
-        <p>Pris: </p>
-        <p>Längd: </p>
-        <p>Kontakt:</p>
-    </div>
+    
 </body>
 </html>

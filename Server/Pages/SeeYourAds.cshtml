@@ -1,4 +1,5 @@
 @page
+@using Server.Models;
 @model Server.Pages.SeeYourAds
 
 @{
@@ -7,6 +8,43 @@
 @{
     ViewData["Title"] = "SeeYourAds";
 }
+
+@if(Model.SellAds.Count != 0 ){<h2>Säljannonser</h2>}
+@foreach (SellAd SellAd in Model.SellAds)
+{
+                <div class="sell-ad">
+                    <h3>@SellAd.Title</h3>
+                    <p>Beskrivning: @SellAd.Description</p>
+                    <p>Pris: @SellAd.Price</p>
+                    <p>Längd: @SellAd.Length </p>
+                </div>
+}
+@if (Model.SellAds.Count != 0)
+{
+    <h2>Köpannonser</h2>
+}
+@foreach (BuyAd buyAd in Model.BuyAds)
+{
+        <title>Sell Ad</title>
+        <style>
+            .sell-ad {
+                border: 1px solid #ccc;
+                padding: 10px;
+                width: 300px;
+                background-color: #f5f5f5;
+                font-family: Arial, sans-serif;
+            }
+        </style>
+
+            <div class="sell-ad">
+                <h3>@buyAd.Title</h3>
+                <p>Beskrivning: @buyAd.Description</p>
+                <p>Pris: @buyAd.Price </p>
+                <p>Längd: @buyAd.Length</p>
+                <p>Kontakt:</p>
+            </div>
+}
+
 
 <!DOCTYPE html>
 
@@ -17,6 +55,7 @@
     <link rel="stylesheet" href="css/CreateAd.css">
 </head>
 </body>
+
 
 <body id="background">
 <div id="textDiv">
@@ -37,3 +76,4 @@
 </div>
 </body>
 </html>
+}
