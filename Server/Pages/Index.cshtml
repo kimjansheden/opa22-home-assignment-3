@@ -7,6 +7,42 @@
     ViewData["Title"] = "Home page";
 }
 
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slideshow at the Bottom</title>
+    <style>
+        body {
+            position: relative;
+            margin: 0;
+            padding-bottom: 100px;
+
+        }
+
+        .slideshow-container {
+            max-width: 500px;
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f2f2f2;
+            padding: 10px;
+        }
+
+        .slideshow-container img {
+            width: 100%;
+            height: auto;
+        }
+
+        .slideshow-container .slide {
+            display: none;
+        }
+
+        .slideshow-container .slide.active {
+            display: block;
+        }
+    </style>
+
 <style>
     .button {
         display: inline-block;
@@ -24,11 +60,46 @@
     }
 </style>
 <div class="text-center">
+    
+    <div class="slideshow-container">
+                <div class="slide active">
+                    <img src="../Images/image1.jpeg" alt="Image 1">
+                </div>
+                <div class="slide">
+                    <img src="../Images/image2.jpeg" alt="Image 2">
+                </div>
+                <div class="slide">
+                    <img src="../Images/image3.jpeg" alt="Image 3">
+                </div>
+            </div>
     <h1 class="display-4">Välkommen till båtsidan!</h1>
-    @foreach (User user in Model.Users)
-    {
-        <p>@user.Username</p>
-    }
+
+
+
+    <script>
+            let slideIndex = 0;
+            const slides = document.getElementsByClassName('slide');
+    
+            function showSlide() {
+                for (let i = 0; i < slides.length; i++) {
+                    slides[i].style.display = 'none';
+                }
+                slides[slideIndex].style.display = 'block';
+            }
+    
+            function changeSlide() {
+                slideIndex++;
+                if (slideIndex >= slides.length) {
+                    slideIndex = 0;
+                }
+                showSlide();
+            }
+    
+            setInterval(changeSlide, 3000); // Change slide every 3 seconds (adjust as needed)
+    
+            showSlide();
+        </script>
+
     <a class="button" asp-page="/CreateUser">Lägg till ny användare</a>
 </div>
 
