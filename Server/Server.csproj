@@ -24,7 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Images" />
+    <None Include="wwwroot\Images\image1.jpeg" />
+    <None Include="wwwroot\Images\image2.jpeg" />
+    <None Include="wwwroot\Images\image3.jpeg" />
+    <None Include="wwwroot\Images\IMG_7513.tiff" />
   </ItemGroup>
 
 </Project>
