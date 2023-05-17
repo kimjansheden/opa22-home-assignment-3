@@ -400,10 +400,12 @@ public class Helper
         catch (HttpRequestException e)
         {
             Console.WriteLine($"Request exception: {e.Message}");
+            return (0, null);
         }
         catch (Exception e)
         {
             Console.WriteLine($"General exception: {e.Message}");
+            return (0, null);
         }
         
         var proceed = "";

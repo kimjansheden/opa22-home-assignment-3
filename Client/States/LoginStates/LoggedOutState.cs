@@ -101,7 +101,6 @@ public class LoggedOutState : LoginState
         }
         
         App.LoginState = App.LoginStates["LoggedIn"];
-        App.CurrentUser.LoggedIn = true;
     }
 
     private void MustBeLoggedIn()

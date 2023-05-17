@@ -82,10 +82,22 @@ public class AdController : ControllerBase
             }
         }
 
-        if (ad == null || !adBelongsToUser)
+        if (ad != null && !adBelongsToUser)
         {
             _logger.LogInformation("A {Adtype} with ID {Id} does not belong to you", ad.GetType(), request.Id);
             return BadRequest(new { message = $"A {ad.GetType()} with ID {request.Id} does not belong to you" });
+        }
+        
+        if (ad == null && request.BuyAd)
+        {
+            _logger.LogInformation("A Buy Ad with ID {Id} does not exist", request.Id);
+            return BadRequest(new { message = $"A Buy Ad with ID {request.Id} does not belong to you" });
+        }
+        
+        if (ad == null && !request.BuyAd)
+        {
+            _logger.LogInformation("A Sell Ad with ID {Id} does not exist", request.Id);
+            return BadRequest(new { message = $"A Sell Ad with ID {request.Id} does not belong to you" });
         }
         
         _logger.LogInformation("Ad belongs to user. Returning ad");
@@ -286,13 +298,14 @@ public class AdController : ControllerBase
         var adTitle = ad.Title;
         
         // Delete the ad
+        // Note! The ad needs to be deleted from the general list of BuyAds and SellAds, respectively.  When the ad is removed, that will also break the connection with the user (foreign key UserId).
         if (ad is BuyAd buyAd)
         {
-            user.BuyAds.Remove(buyAd);
+            _db.BuyAds.Remove(buyAd);
         }
         if (ad is SellAd sellAd)
         {
-            user.SellAds.Remove(sellAd);
+            _db.SellAds.Remove(sellAd);
         }
 
         _db.SaveChanges();

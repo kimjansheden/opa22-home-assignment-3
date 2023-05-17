@@ -19,14 +19,6 @@ public class UserController : ControllerBase
         _db = db;
         _logger = logger;
     }
-    
-    // Denna är bara för test, ska tas bort. Man ska inte kunna plocka ut alla users.
-    [HttpGet]
-    public List<User> GetUsers()
-    {
-        Users = _db.Users.Include(p => p.BuyAds).Include(p => p.SellAds).ToList();
-        return Users;
-    }
 
     // Authenticate the credentials received from the POST request and return the User object including all ads to the requester.
     [Route("get")]
@@ -45,6 +37,12 @@ public class UserController : ControllerBase
         {
             _logger.LogInformation("The password you have entered, {Password}, does not match the password of user {Username}", request.Password, request.Username);
             return BadRequest(new { message = "Incorrect password" });
+        }
+
+        // If the user's LoggedIn state is not true, then log in the user. But don't save it in the database; just pass the status to the client.
+        if (!user.LoggedIn)
+        {
+            user.LoggedIn = true;
         }
         
         _logger.LogInformation("{User} successfully authenticated", request.Username);

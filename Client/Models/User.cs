@@ -39,16 +39,15 @@ public class User
             {
                 ad.PrintAd();
             }
-
-            if (BuyAds.Count != 0)
+        }
+        else if (BuyAds.Count != 0)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Buy Ads");
+            foreach (BuyAd ad in BuyAds)
             {
-                Console.WriteLine();
-                Console.WriteLine("Buy Ads");
-                foreach (BuyAd ad in BuyAds)
-                {
-                    ad.PrintAd();
-                }   
-            }
+                ad.PrintAd();
+            }   
         }
         else
         {

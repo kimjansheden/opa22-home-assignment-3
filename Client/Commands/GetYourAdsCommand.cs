@@ -31,7 +31,8 @@ public class GetYourAdsCommand : ICommand
         // Here we have a logged in user, otherwise we wouldn't have reached this code.
         // Then we can just fetch the user's ads from the database to always have the latest ones and then print them here.
        
-        // Send the username and password of the already logged in user (CurrentUser.Username and CurrentUser.Password) as a POST Request to the server and authenticate. Then update CurrentUser with the up to date User object we receive from the server and lastly print the ads.
+        // Send the username and password of the already logged in user (CurrentUser.Username and CurrentUser.Password) as a POST Request to the server and authenticate.
+        // Then update CurrentUser with the up to date User object we receive from the server and lastly print the ads.
             
             _app.CurrentUri = new Uri(_app.GetUserByUsernameUri);
         
@@ -62,6 +63,7 @@ public class GetYourAdsCommand : ICommand
             
             jsonString = await response.Content.ReadAsStringAsync();
 
+            // Download the logged in user's User object to get the current info from the database.
             _app.CurrentUser = JsonSerializer.Deserialize<User>(jsonString, new JsonSerializerOptions()
             {
                 PropertyNameCaseInsensitive = true
