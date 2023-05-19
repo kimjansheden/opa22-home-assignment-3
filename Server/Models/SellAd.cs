@@ -9,4 +9,6 @@ public class SellAd:Ad
     public SellAd() : base()
     {
     }
+
+    public int UserId { get; set; }
 }
