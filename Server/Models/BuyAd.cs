@@ -9,4 +9,6 @@ public class BuyAd:Ad
     public BuyAd() : base()
     {
     }
+
+    public int UserId { get; set; }
 }

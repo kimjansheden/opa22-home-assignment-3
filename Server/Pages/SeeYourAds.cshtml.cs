@@ -24,12 +24,21 @@ namespace Server.Pages
 
         public void OnGet()
         {
-            
+            if (TheUser != null)
+            {
+                BuyAds = Context.BuyAds.Where(ad => ad.UserId == TheUser.Id).ToList();
+                SellAds = Context.SellAds.Where(ad => ad.UserId == TheUser.Id).ToList();
+            }
         }
         public void OnPost() 
         {
-            BuyAds = Context.BuyAds.ToList();
-            SellAds = Context.SellAds.ToList();
+            TheUser = Context.Users.FirstOrDefault(u => u.Username == TheUser.Username && u.Password == TheUser.Password);
+    
+            if (TheUser != null)
+            {
+                BuyAds = Context.BuyAds.Where(ad => ad.UserId == TheUser.Id).ToList();
+                SellAds = Context.SellAds.Where(ad => ad.UserId == TheUser.Id).ToList();
+            }
         }
     }
 }
