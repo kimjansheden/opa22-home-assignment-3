@@ -19,7 +19,14 @@ namespace Server.Pages
 
         public void OnGet()
         {
-            AllBuyAds = Context.BuyAds.ToList();
+            try
+            {
+                AllBuyAds = Context.BuyAds.ToList();
+            }
+            catch (Exception e)
+            {
+                // ignored
+            }
         }
     }
 }
