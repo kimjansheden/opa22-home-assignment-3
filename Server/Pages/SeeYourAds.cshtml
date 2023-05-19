@@ -9,19 +9,19 @@
     ViewData["Title"] = "SeeYourAds";
 }
 
-@if(Model.SellAds.Count != 0 ){<h2>Säljannonser</h2>}
+@if(Model.SellAds.Count != 0 ){<h2>SÃ¤ljannonser</h2>}
 @foreach (SellAd SellAd in Model.SellAds)
 {
                 <div class="sell-ad">
                     <h3>@SellAd.Title</h3>
                     <p>Beskrivning: @SellAd.Description</p>
                     <p>Pris: @SellAd.Price</p>
-                    <p>Längd: @SellAd.Length </p>
+                    <p>LÃ¤ngd: @SellAd.Length </p>
                 </div>
 }
 @if (Model.SellAds.Count != 0)
 {
-    <h2>Köpannonser</h2>
+    <h2>KÃ¶pannonser</h2>
 }
 @foreach (BuyAd buyAd in Model.BuyAds)
 {
@@ -40,7 +40,7 @@
                 <h3>@buyAd.Title</h3>
                 <p>Beskrivning: @buyAd.Description</p>
                 <p>Pris: @buyAd.Price </p>
-                <p>Längd: @buyAd.Length</p>
+                <p>LÃ¤ngd: @buyAd.Length</p>
                 <p>Kontakt:</p>
             </div>
 }
@@ -59,13 +59,13 @@
 
 <body id="background">
 <div id="textDiv">
-    <h1 class="display-4">Logga in för att se dina annonser</h1>
+    <h1 class="display-4">Logga in fÃ¶r att se dina annonser</h1>
     <form method="post">
         <div class="container">
             
-            <div class="box"><label for="Username">Användarnamn</label></div>
+            <div class="box"><label for="Username">AnvÃ¤ndarnamn</label></div>
             <div class="box"><input id="Username" name="Username" type="Text"/></div>
-            <div class="box"><label for="Password">Lösenord</label></div>
+            <div class="box"><label for="Password">LÃ¶senord</label></div>
             <div class="box"><input id="Password" name="Password" type="Text"/></div>
             
             <div class="box"><input type="submit" value="Se dina annonser" name="submit"></div>

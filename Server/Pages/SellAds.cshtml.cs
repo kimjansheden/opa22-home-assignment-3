@@ -24,7 +24,14 @@ namespace Server.Pages
 
         public void OnGet()
         {
-            AllSellAds = Context.SellAds.ToList();
+            try
+            {
+                AllSellAds = Context.SellAds.ToList();
+            }
+            catch (Exception e)
+            {
+                // ignored
+            }
         }
     }
 }
