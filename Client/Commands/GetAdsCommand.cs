@@ -22,7 +22,18 @@ public class GetAdsCommand : ICommand
         var buyAds = await GetBuyAds();
         var sellAds = await GetSellAds();
 
-        Console.WriteLine($"There are currently {buyAds.Count + sellAds.Count} ads on the site.");
+        var buyAdsCount = 0;
+        var sellAdsCount = 0;
+        if (buyAds != null)
+        {
+            buyAdsCount = buyAds.Count;
+        }
+        if (sellAds != null)
+        {
+            sellAdsCount = sellAds.Count;
+        }
+
+        Console.WriteLine($"There are currently {buyAdsCount + sellAdsCount} ads on the site.");
         
         // Print BuyAds
         if (buyAds != null)
@@ -52,14 +63,22 @@ public class GetAdsCommand : ICommand
         _app.CurrentUri = new Uri(_app.DefaultApiUri + "ad/buyads");
         UpdateUri();
         string jsonString = "";
-        HttpResponseMessage response = await _client.GetAsync(_uri);
-
-        jsonString = await response.Content.ReadAsStringAsync();
-
-        List<BuyAd>? buyAds = JsonSerializer.Deserialize<List<BuyAd>>(jsonString, new JsonSerializerOptions()
+        List<BuyAd>? buyAds = null;
+        try
         {
-            PropertyNameCaseInsensitive = true
-        });
+            HttpResponseMessage response = await _client.GetAsync(_uri);
+
+            jsonString = await response.Content.ReadAsStringAsync();
+
+            buyAds = JsonSerializer.Deserialize<List<BuyAd>>(jsonString, new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true
+            });
+        }
+        catch (Exception e)
+        {
+            return buyAds;
+        }
 
         return buyAds;
     }
@@ -69,14 +88,22 @@ public class GetAdsCommand : ICommand
         _app.CurrentUri = new Uri(_app.DefaultApiUri + "ad/sellads");
         UpdateUri();
         string jsonString = "";
-        HttpResponseMessage response = await _client.GetAsync(_uri);
-
-        jsonString = await response.Content.ReadAsStringAsync();
-
-        List<SellAd>? sellAds = JsonSerializer.Deserialize<List<SellAd>>(jsonString, new JsonSerializerOptions()
+        List<SellAd>? sellAds = null;
+        try
         {
-            PropertyNameCaseInsensitive = true
-        });
+            HttpResponseMessage response = await _client.GetAsync(_uri);
+
+            jsonString = await response.Content.ReadAsStringAsync();
+
+            sellAds = JsonSerializer.Deserialize<List<SellAd>>(jsonString, new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true
+            });
+        }
+        catch (Exception e)
+        {
+            return sellAds;
+        }
 
         return sellAds;
     }
