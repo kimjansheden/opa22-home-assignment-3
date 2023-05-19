@@ -6,8 +6,10 @@
 @{
     Layout = "/Pages/Shared/_Layout.cshtml";
 }
-@foreach(BuyAd buyAd in Model.AllBuyAds)
-{
+
+<div class="row">
+    @foreach(BuyAd buyAd in Model.AllBuyAds)
+    {
         <div class="sell-ad">
             <h3>@buyAd.Title</h3>
             <p>Beskrivning: @buyAd.Description</p>
@@ -15,7 +17,8 @@
             <p>Längd: @buyAd.Length</p>
             <p>Kontakt:</p>
         </div>
-}
+    }
+</div>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +32,15 @@
             width: 300px;
             background-color: #f5f5f5;
             font-family: Arial, sans-serif;
+            float: left;
+            margin: 10px;
         }
+        
+        .row::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
     </style>
 </head>
 
